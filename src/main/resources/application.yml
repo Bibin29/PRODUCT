@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /targetretail
+logging:
+  file.name: ${user.home}/logs/target-retail-productapi/target-retail-productapi.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    root: INFO
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    org.springframework.data.cassandra.core.cql.CqlTemplate: TRACE
+apiEndpoints:
+   productnameAPIURL: http://127.0.0.1:8080/${server.servlet.context-path}/productname    
+
+      

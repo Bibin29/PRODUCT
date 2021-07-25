@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "ffc9ca8a-4fb5-4936-bbc7-697273a3bb91",
+		"name": "RetailProductAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retail API",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 13860428,\r\n    \"name\": \"Samsung TV\",\r\n    \"current_price\": {\r\n        \"value\": 3000.0,\r\n        \"currency_code\": null\r\n    },\r\n    \"complete\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/targetretail/products/13860429?excludes=taxonomy",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"targetretail",
+						"products",
+						"13860429"
+					],
+					"query": [
+						{
+							"key": "excludes",
+							"value": "taxonomy"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

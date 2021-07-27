@@ -58,7 +58,7 @@ public class ProductService {
 			getProductName(pDataDTO, product);
 			pdres = populateProductData(product);
 		} else {
-			throw new ProductNotFoundException(pDataDTO.getProductId());
+			throw new ProductNotFoundException(String.valueOf(pDataDTO.getProductId()),new Exception());
 		}
 		return pdres;
 

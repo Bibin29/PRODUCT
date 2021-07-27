@@ -48,7 +48,10 @@ ProductService productService;
     	productDTO.setProductId(id);
     	ProductDataResponse pr=productService.getProductById(productDTO);
 		return new ResponseEntity<>(pr,HttpStatus.OK);}
-		catch(GenericApiException |ProductNotFoundException e) {
+		catch(ProductNotFoundException e) {
+			throw new ProductNotFoundException(String.valueOf(id), e);
+		}
+		catch(GenericApiException e) {
 			throw new GenericApiException(String.valueOf(id), e);
 		}
 
@@ -72,6 +75,9 @@ ProductService productService;
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}catch (ProductDataUpdateException e) {
 			throw new ProductDataUpdateException(String.valueOf(id), e);
+		}
+		catch (GenericApiException e) {
+			throw new GenericApiException(String.valueOf(id), e);
 		}
 		
 	}

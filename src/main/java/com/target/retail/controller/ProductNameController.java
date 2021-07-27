@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.target.retail.exceptions.GenericApiException;
+import com.target.retail.exceptions.ProductNotFoundException;
 import com.target.retail.model.ProductDataDTO;
 import com.target.retail.model.ProductDataResponse;
 import com.target.retail.service.ProductNameService;
@@ -46,10 +48,19 @@ public class ProductNameController {
 			@ApiParam(value = "ID of product", required = true) @PathVariable("id") Integer id,
 			@ApiParam(value = "This parameter to use to filter specific products.") @Valid @RequestParam(value = "excludes", required = false) List<String> excludes) {
 		logger.info("Product :{}", id);
-		ProductDataDTO pDataDTO = new ProductDataDTO();
-		pDataDTO.setProductId(id);
-		pDataDTO.setProductFilter(excludes);
-		ProductDataResponse pr = productService.getProductNameById(pDataDTO);
-		return new ResponseEntity<>(pr, HttpStatus.OK);
+		try {
+			ProductDataDTO pDataDTO = new ProductDataDTO();
+			pDataDTO.setProductId(id);
+			pDataDTO.setProductFilter(excludes);
+			ProductDataResponse pr = productService.getProductNameById(pDataDTO);
+			return new ResponseEntity<>(pr, HttpStatus.OK);
+		}
+		catch(ProductNotFoundException e) {
+			throw new ProductNotFoundException(String.valueOf(id), e);
+		}
+		catch(GenericApiException e) {
+			throw new GenericApiException(String.valueOf(id), e);
+		}
+		
 	}
 }

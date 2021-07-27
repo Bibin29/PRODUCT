@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.target.retail.entities.ProductData;
+import com.target.retail.exceptions.ProductNotFoundException;
 import com.target.retail.model.ProductCurrentPrice;
 import com.target.retail.model.ProductDataDTO;
 import com.target.retail.model.ProductDataResponse;
@@ -36,6 +37,8 @@ public class ProductNameService {
 				pd = populateProductData(product);
 			}
 			
+		} else {
+			throw new ProductNotFoundException(String.valueOf(pDataDTO.getProductId()),new Exception());
 		}
 		return pd;
 
